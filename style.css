@@ -791,3 +791,38 @@ footer {
   .upload { padding: 10px; }
   footer { padding: 14px 10px; }
 }
+@media (max-width: 760px) {
+  #kepek {
+    padding: 13px;
+  }
+
+  .album-tools {
+    gap: 6px;
+    margin: 8px 0;
+  }
+
+  .album-tools .btn {
+    padding: 9px 10px;
+    font-size: 11px;
+  }
+
+  .upload {
+    padding: 10px;
+  }
+
+  .album-heading {
+    margin-top: 10px;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 5px;
+    margin-top: 8px;
+  }
+
+  .gallery img,
+  .gallery .placeholder {
+    aspect-ratio: 1.15;
+    border-radius: 8px;
+  }
+}
