@@ -689,106 +689,105 @@ footer {
     scroll-behavior: auto !important;
   }
 }
-/* Mobilnézet finomhangolása */
+/* Kompaktabb mobilnézet */
 @media (max-width: 760px) {
   header {
-    padding: 14px 16px;
-    align-items: center;
-    gap: 10px;
+    padding: 10px 14px;
+    gap: 7px;
+    flex-wrap: wrap;
   }
 
-  .brand {
-    font-size: 22px;
-  }
+  .brand { font-size: 21px; }
+  .brand-mark { width: 30px; height: 30px; }
 
   .nav {
     width: 100%;
-    display: flex;
     flex-wrap: wrap;
-    gap: 6px 14px;
-    font-size: 12px;
+    gap: 4px 12px;
+    font-size: 11px;
   }
 
-  main {
-    padding: 10px 14px 32px;
-  }
+  .nav a:not(.pill) { padding: 4px 0; }
+
+  main { padding: 6px 14px 24px; }
 
   .hero {
     grid-template-columns: 1fr;
-    gap: 18px;
-    padding: 18px 0 28px;
+    gap: 10px;
+    padding: 10px 0 16px;
   }
 
   h1 {
-    font-size: clamp(36px, 10vw, 44px);
+    font-size: clamp(32px, 8vw, 39px);
+    line-height: 1.02;
+    margin: 8px 0;
   }
 
   .lead {
-    font-size: 14px;
-    line-height: 1.65;
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 8px;
   }
 
+  .actions { margin-top: 12px; gap: 8px; }
+  .btn { padding: 10px 13px; }
+
   .photo-stage {
-    min-height: 230px;
-    border-radius: 22px;
+    min-height: 145px;
+    max-height: 165px;
+    border-radius: 18px;
   }
 
   .couple-art {
-    height: 180px;
+    height: 125px;
+    width: 66%;
   }
 
-  .person {
-    width: 88px;
-    height: 145px;
-  }
+  .person { width: 68px; height: 95px; }
 
   .person:before {
-    width: 62px;
-    height: 62px;
-    left: 13px;
-    top: -40px;
+    width: 48px;
+    height: 48px;
+    left: 10px;
+    top: -31px;
   }
+
+  .float-note { padding: 7px 9px; font-size: 9px; }
+
+  .section-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+    margin: 8px 0 10px;
+  }
+
+  .section-head h2 { font-size: 25px; }
 
   .dashboard,
   .lower {
     grid-template-columns: 1fr;
+    gap: 10px;
   }
 
-  .section-head {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 12px;
-  }
+  .card { padding: 14px; border-radius: 17px; }
+  .counter { padding: 14px 10px; }
+  .counter .heart { font-size: 21px; }
+  .counter h3 { font-size: 21px; margin: 4px 0; }
 
-  .card {
-    padding: 17px;
-    border-radius: 18px;
-  }
+  .timer { margin: 10px 0 0; gap: 4px; }
+  .time-box { padding: 8px 2px; }
+  .time-box strong { font-size: 19px; }
 
-  .timer {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 5px;
-  }
+  .memory-list { gap: 8px; }
+  .memory { padding-bottom: 8px; }
 
-  .time-box {
-    padding: 11px 2px;
-  }
-
-  .time-box strong {
-    font-size: clamp(17px, 5vw, 22px);
-  }
+  .lower { margin-top: 10px; }
 
   .gallery {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 7px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
   }
 
-  .form-row {
-    flex-direction: column;
-  }
-
-  .form-row .btn,
-  form > .btn {
-    width: 100%;
-  }
+  .upload { padding: 10px; }
+  footer { padding: 14px 10px; }
 }
