@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff8f6">
+  <title>Ketten – A mi kis világunk</title>
+  <link rel="stylesheet" href="./src/style.css">
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    #emlekek,
+    #kepek {
+      scroll-margin-top: 24px;
+    }
+
+    @media (max-width: 760px) {
+      .nav a {
+        display: inline-flex !important;
+        align-items: center;
+      }
+
+      .nav {
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./src/main.js" defer></script>
+</head>
+
+<body>
+<div class="app">
+  <div class="decor one">♡</div>
+  <div class="decor two">♡</div>
+
+  <header>
+    <div class="brand">
+      <span class="brand-mark">♡</span> ketten.
+    </div>
+
+    <nav class="nav">
+      <a href="#emlekek">Pillanataink</a>
+      <a href="#kepek">Fotóalbumok</a>
+      <button class="btn secondary" id="logout-button" type="button">
+        Kijelentkezés
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="card auth-card" id="auth-view">
+      <div class="eyebrow">Egy hely, ami csak a tietek</div>
+      <h1>Két szív. <em>Egy közös történet.</em></h1>
+      <p class="lead">
+        Jelentkezzetek be, vagy hozzatok létre saját közös teret.
+      </p>
+
+      <div class="actions">
+        <button class="btn primary" id="show-login" type="button">
+          Bejelentkezés
+        </button>
+        <button class="btn secondary" id="show-register" type="button">
+          Regisztráció
+        </button>
+      </div>
+
+      <form id="login-form" class="card auth-form">
+        <h3>Bejelentkezés</h3>
+        <label for="login-email">E-mail-cím</label>
+        <input id="login-email" type="email" autocomplete="email" required>
+
+        <label for="login-password">Jelszó</label>
+        <input id="login-password" type="password" autocomplete="current-password" required>
+
+        <button class="btn primary form-button" type="submit">
+          Belépés ♡
+        </button>
+      </form>
+
+      <form id="register-form" class="card auth-form" hidden>
+        <h3>Új fiók létrehozása</h3>
+        <label for="register-email">E-mail-cím</label>
+        <input id="register-email" type="email" autocomplete="email" required>
+
+        <label for="register-password">Jelszó</label>
+        <input id="register-password" type="password" autocomplete="new-password" minlength="6" required>
+
+        <button class="btn primary form-button" type="submit">
+          Regisztráció ♡
+        </button>
+      </form>
+
+      <p id="auth-feedback" class="feedback" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="card pair-card" id="pair-view" hidden>
+      <div class="eyebrow">A közös történet kezdete</div>
+      <h2>Hozzátok létre a közös tereteket</h2>
+
+      <form id="create-couple-form">
+        <label for="couple-name">A közös tér neve</label>
+        <input id="couple-name" placeholder="Például: Anna és Bence" required>
+
+        <label for="couple-start-date">Mióta vagytok együtt?</label>
+        <input id="couple-start-date" type="date" required>
+
+        <button class="btn primary form-button" type="submit">
+          Közös tér létrehozása ♡
+        </button>
+      </form>
+
+      <div class="divider"></div>
+
+      <form id="join-couple-form">
+        <label for="invite-code">Meghívókód</label>
+        <input id="invite-code" autocomplete="off" placeholder="Illeszd be a párod kódját" required>
+
+        <button class="btn secondary form-button" type="submit">
+          Csatlakozás meghívóval
+        </button>
+      </form>
+
+      <p id="pair-feedback" class="feedback" role="status" aria-live="polite"></p>
+    </section>
+
+    <section id="app-view" hidden>
+      <section class="hero">
+        <div>
+          <div class="eyebrow">Egy hely, ami csak a tietek</div>
+          <h1>Két szív.<br><em>Egy közös</em><br>történet.</h1>
+          <p class="lead">
+            Őrizzétek meg a közös pillanatokat, töltsétek fel
+            a kedvenc fotóitokat, és nézzétek, mennyi idő telt el
+            azóta, hogy elkezdődött a ti történetetek.
+          </p>
+        </div>
+
+        <div class="photo-stage">
+          <div class="couple-art">
+            <div class="person left"></div>
+            <div class="person right"></div>
+          </div>
+          <div class="float-note top">te + én = mindig ♡</div>
+          <div class="float-note bottom">A kedvenc helyem melletted van.</div>
+        </div>
+      </section>
+
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">A kedvenc fejezetünk</div>
+          <h2 id="couple-title">A mi kis világunk</h2>
+        </div>
+
+        <div class="invite-area">
+          <small>Meghívókód: <strong id="invite-code-display">—</strong></small>
+          <button class="btn secondary" id="copy-invite-button" type="button">
+            Kód másolása
+          </button>
+        </div>
+      </div>
+
+      <section class="dashboard">
+        <div class="card counter">
+          <div class="heart">♥</div>
+          <h3>Már ennyi ideje együtt</h3>
+          <div class="date-line" id="since-label">A közös történetetek</div>
+
+          <div class="timer">
+            <div class="time-box">
+              <strong id="days">—</strong>
+              <span>nap</span>
+            </div>
+            <div class="time-box">
+              <strong id="hours">—</strong>
+              <span>óra</span>
+            </div>
+            <div class="time-box">
+              <strong id="minutes">—</strong>
+              <span>perc</span>
+            </div>
+            <div class="time-box">
+              <strong id="seconds">—</strong>
+              <span>másodperc</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" id="emlekek">
+          <div class="eyebrow">Apró nagy pillanatok</div>
+          <h3 class="card-title">Pillanataink ♡</h3>
+          <p class="date-line">
+            Őrizzétek meg a közös történetetek legszebb pillanatait.
+          </p>
+
+          <form id="memory-form">
+            <label for="memory-title">Mi legyen a pillanat neve?</label>
+            <input id="memory-title" placeholder="Például: Az első közös utazás" required>
+
+            <label for="memory-description">Mi történt?</label>
+            <textarea id="memory-description" placeholder="Írjatok pár szót erről a pillanatról..."></textarea>
+
+            <label for="memory-date">Mikor történt?</label>
+            <input id="memory-date" type="date">
+
+            <button class="btn primary form-button" type="submit">
+              Pillanat mentése ♡
+            </button>
+          </form>
+
+          <div class="memory-list" id="memories-list"></div>
+        </div>
+      </section>
+
+      <section class="lower">
+        <div class="card" id="kepek">
+          <div class="eyebrow">Közös albumok ♡</div>
+          <h3 class="card-title">A közös fotóink</h3>
+          <p class="date-line">
+            Töltsétek fel a kedvenc képeiteket, rendezzétek albumokba,
+            és őrizzétek meg együtt az emlékeiteket.
+          </p>
+
+          <div class="album-tools">
+            <form id="album-form">
+              <input id="album-name" placeholder="Új album neve" aria-label="Új album neve" required>
+              <button class="btn secondary" type="submit">
+                Album létrehozása
+              </button>
+            </form>
+
+            <select id="album-select" aria-label="Album kiválasztása">
+              <option value="">Összes kép</option>
+            </select>
+          </div>
+
+          <form id="photo-form" class="upload">
+            <label for="photo-input">♡ Válasszatok ki egy vagy több fotót</label>
+            <input
+              id="photo-input"
+              type="file"
+              accept="image/jpeg,image/png,image/webp,image/gif"
+              multiple
+              required
+            >
+            <small>JPG, PNG, WEBP vagy GIF · legfeljebb 10 MB/kép</small>
+
+            <button class="btn primary form-button" type="submit">
+              Fotók feltöltése ♡
+            </button>
+          </form>
+
+          <div class="album-heading">
+            <strong id="gallery-title">Minden közös képünk</strong>
+            <small id="gallery-count"></small>
+          </div>
+
+          <div class="gallery" id="gallery">
+            <p class="empty-state">Még nincs feltöltött közös képetek.</p>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer>Készült szeretettel. A legszebb történet a tietek. ♡</footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</div>
+</body>
+</html>
