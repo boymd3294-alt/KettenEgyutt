@@ -689,3 +689,106 @@ footer {
     scroll-behavior: auto !important;
   }
 }
+/* Mobilnézet finomhangolása */
+@media (max-width: 760px) {
+  header {
+    padding: 14px 16px;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .brand {
+    font-size: 22px;
+  }
+
+  .nav {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    font-size: 12px;
+  }
+
+  main {
+    padding: 10px 14px 32px;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 18px 0 28px;
+  }
+
+  h1 {
+    font-size: clamp(36px, 10vw, 44px);
+  }
+
+  .lead {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .photo-stage {
+    min-height: 230px;
+    border-radius: 22px;
+  }
+
+  .couple-art {
+    height: 180px;
+  }
+
+  .person {
+    width: 88px;
+    height: 145px;
+  }
+
+  .person:before {
+    width: 62px;
+    height: 62px;
+    left: 13px;
+    top: -40px;
+  }
+
+  .dashboard,
+  .lower {
+    grid-template-columns: 1fr;
+  }
+
+  .section-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .card {
+    padding: 17px;
+    border-radius: 18px;
+  }
+
+  .timer {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 5px;
+  }
+
+  .time-box {
+    padding: 11px 2px;
+  }
+
+  .time-box strong {
+    font-size: clamp(17px, 5vw, 22px);
+  }
+
+  .gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  .form-row .btn,
+  form > .btn {
+    width: 100%;
+  }
+}
